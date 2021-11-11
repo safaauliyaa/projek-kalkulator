@@ -14,15 +14,34 @@ const inputNumber = (number) => {
 
 const numbers = document.querySelectorAll(".number")
 
-const operators = document.querySelectorAll(".operator")
+numbers.forEach((number) => {
+    number.addEventListener("click", (event) => {
+        inputNumber(event.target.value)
+        // console.log(event.target.value)
+        updateScreen(currentNumber)
+    })
+})
+
+let prevNumber = ''
+let calculationOperator = ''
+let currentNumber = '0'
+
 
 const inputOperator = (operator) => {
-    prevNumber = currentNumber
+    if(calculationOperator === '') {
+        prevNumber = currentNumber
+    }
     calculationOperator = operator
     currentNumber = ''
 }
 
-const equalSign = document.querySelector('.sama-dengan')
+const operators = document.querySelectorAll(".operator")
+
+operators.forEach((operator) => {
+    operator.addEventListener("click", (event) => {
+        inputOperator(event.target.value)
+    })
+})
 
 const calculate = () => {
     let result = ''
@@ -42,13 +61,23 @@ const calculate = () => {
         default:
             break
     }
+    currentNumber = result
+    calculationOperator = ''
 }
+
+const equalSign = document.querySelector('.sama-dengan')
+
+equalSign.addEventListener('click', () => {
+    calculate()
+    updateScreen(currentNumber)
+})
 
 const clearAll = () => {
     prevNumber = ''
     calculationOperator = ''
     currentNumber = '0'
 }
+
 const clearBtn = document.querySelector('.AC')
 
 clearBtn.addEventListener('click', () => {
@@ -69,32 +98,3 @@ decimal.addEventListener('click', (event) => {
     inputDecimal(event.target.value)
     updateScreen(currentNumber)
 })
-
-
-
-currentNumber = result
-calculationOperator = ''
-
-equalSign.addEventListener('click', () => {
-    calculate()
-    updateScreen(currentNumber)
-})
-
-numbers.forEach((number) => {
-    number.addEventListener("click", (event) => {
-        inputNumber(event.target.value)
-        // console.log(event.target.value)
-        updateScreen(currentNumber)
-    })
-})
-
-operators.forEach((operator) => {
-    operator.addEventListener("click", (event) =>){
-        inputOperator(event.target.value)
-    }
-})
-
-let prevNumber = ''
-let calculationOperator = ''
-let currentNumber = '0'
-
