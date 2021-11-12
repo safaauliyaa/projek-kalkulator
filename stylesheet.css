@@ -35,7 +35,7 @@ button{
     outline: none;
 }
 
-.AC , .number-0{
+.AC , .sama-dengan{
     width: 50%;
 }
 
@@ -46,6 +46,7 @@ button{
 button:hover{
     background-color: darkgray;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 .operator:hover, .sama-dengan:hover{
