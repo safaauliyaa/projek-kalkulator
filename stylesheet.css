@@ -1,17 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Fira+Sans+Condensed&display=swap');
+
+body{
+    background: rgb(2, 6, 27);
+}
+
 .kalkulator{
     text-align: center;
     margin: 0 auto;
     padding-top: 200px;
-    width: 400px;
+    width: 350px;
 }
 
 .kalkulator-screen{
     width: 100%;
     height: 100px;
-    background-color: #252525;
-    color: white;
+    background-color: #ffffff;
+    border: 1px solid rgb(2, 6, 27);
+    color: rgb(0, 0, 0);
     text-align: right;
-    font-size: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 45px;
     border: none;
     padding: 0 20px;
     box-sizing: border-box;
@@ -27,29 +36,39 @@
 
 button{
     height: 80px;
-    background-color: gray;
-    border: 1px solid black;
+    background-color: rgb(2, 6, 27);
+    border: 2px solid rgb(255, 255, 255);
     font-size: 32px;
-    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    color: rgb(255, 255, 255);
     width: 25%;
     outline: none;
 }
 
 .AC , .sama-dengan{
     width: 50%;
+    background-color: #fa0a9e;
 }
 
 .operator , .sama-dengan{
-    background-color: orange;
+    background-color:  #fa0a9e;
 }
 
 button:hover{
-    background-color: darkgray;
+    background-color: rgb(195, 255, 252);
+    color: black;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.AC:hover{
+    background-color: #ffbfe7;
     font-weight: bolder;
     cursor: pointer;
 }
 
 .operator:hover, .sama-dengan:hover{
-    background-color: darkorange;
+    background-color: #ffbfe7;
     font-weight: bolder;
 }
