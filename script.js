@@ -12,25 +12,13 @@ let calculationOperator = ''
 let currentNumber = '0'
 
 
-let checkResult = false
-let checkPersen = false
-let count = 0
-
-
 const updateScreen = (number) => {
-    // calculatorScreen.value = number
-    if (calculatorScreen.value === '0' || checkResult === true || count >= 2) {
-        calculatorScreen.value = number
-    } else{
-        calculatorScreen.value += number
-    }
-    checkResult = false
+    calculatorScreen.value = number
 }
 
 numbers.forEach((number) => {
     number.addEventListener("click", (event) => {
         inputNumber(event.target.value)
-        // console.log(event.target.value)
         updateScreen(currentNumber)
     })
 })
@@ -41,31 +29,30 @@ const inputNumber = (number) => {
     } else {
         currentNumber += number
     }
-    count += 1
 }
 
 operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
         inputOperator(event.target.value)
         updateScreen(calculationOperator)
+        // updateScreen(currentNumber)
     })
 })
 
 const inputOperator = (operator) => {
-    // if (calculationOperator === '') {
-    //     prevNumber = currentNumber
-    // }
-    // calculationOperator = operator
+    if (currentNumber === '0') {
+        return false
+    } else {
+        currentNumber += operator
+    }
+    calculationOperator = operator
     // currentNumber = '0'
     prevNumber = currentNumber
-    calculationOperator = operator
     currentNumber = ''
-    count = 0
 }
 
 const inputPersen = (percentage) => {
-    calculationOperator = percentage
-    currentNumber += calculationOperator
+    currentNumber /= 100
 }
 
 percentage.addEventListener('click', (event) => {
@@ -75,43 +62,34 @@ percentage.addEventListener('click', (event) => {
 })
 
 equalSign.addEventListener('click', () => {
-    checkResult = true
     calculate()
     updateScreen(currentNumber)
 })
 
+
 const calculate = () => {
-    // let result = ''
-    // switch(calculationOperator) {
-    //     case "+":
-    //         result = parseFloat(prevNumber) + parseFloat(currentNumber)
-    //         break
-    //     case "-":
-    //         result = parseFloat(prevNumber) - parseFloat(currentNumber)
-    //         break
-    //     case "*":
-    //         result = parseFloat(prevNumber) * parseFloat(currentNumber)
-    //         break
-    //     case "/":
-    //         result = parseFloat(prevNumber) / parseFloat(currentNumber)
-    //         break
-    //     case "%":
-    //         result = parseFloat(currentNumber) / 100
-    //         break
-    //     default:
-    //         break
-    // }
-    // currentNumber = result
-    // calculationOperator = ''
-    if (checkPersen === true) {
-        currentNumber = parseFloat(currentNumber) / 100
-        checkPersen = false
+    let result = ''
+    switch(calculationOperator) {
+        case "+":
+            result = parseFloat(prevNumber) + parseFloat(currentNumber)
+            break
+        case "-":
+            result = parseFloat(prevNumber) - parseFloat(currentNumber)
+            break
+        case "*":
+            result = parseFloat(prevNumber) * parseFloat(currentNumber)
+            break
+        case "/":
+            result = parseFloat(prevNumber) / parseFloat(currentNumber)
+            break
+        case "%":
+            result = parseFloat(currentNumber) / 100
+            break
+        default:
+            break
     }
-    if (checkPersen === false) {
-        let calculationResult = eval(calculatorScreen.value)
-        currentNumber = calculationResult
-    }
-    calculationOperator =''
+    currentNumber = result
+    calculationOperator = ''
 }
 
 clearBtn.addEventListener('click', () => {
